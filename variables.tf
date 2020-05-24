@@ -82,17 +82,6 @@ variable "asg_subnets" {
 # Networking Vars
 ########################################
 
-variable "efs_additional_allowed_security_groups" {
-  default     = []
-  description = "Additional security group IDs to attach to the EFS export"
-  type        = list(string)
-}
-
-variable "efs_subnets" {
-  description = "Subnets to create EFS mountpoints in"
-  type        = list(string)
-}
-
 variable "elb_certificate" {
   description = "ARN of certificate to associate with ELB"
   type        = string
@@ -109,7 +98,47 @@ variable "elb_subnets" {
   type        = list(string)
 }
 
+
 variable "vpc_id" {
   description = "VPC to create associated resources in"
   type        = string
+}
+
+########################################
+# EFS Vars
+########################################
+
+variable "efs_additional_allowed_security_groups" {
+  default     = []
+  description = "Additional security group IDs to attach to the EFS export"
+  type        = list(string)
+}
+
+variable "efs_backup_retain_days" {
+  default     = 30
+  description = "Days to retain EFS backups for (only used if `enable_efs_backups=true`)"
+  type        = bool
+}
+
+variable "efs_backup_schedule" {
+  default     = "cron(0 5 ? * * *)"
+  description = "AWS Backup cron schedule (only used if `enable_efs_backups=true`)"
+  type        = string
+}
+
+variable "efs_backup_vault_name" {
+  default     = "nexus-efs-vault"
+  description = "AWS Backup vault name (only used if `enable_efs_backups=true`)"
+  type        = string
+}
+
+variable "efs_subnets" {
+  description = "Subnets to create EFS mountpoints in"
+  type        = list(string)
+}
+
+variable "enable_efs_backups" {
+  default     = false
+  description = "Enable EFS backups using AWS Backup (recommended if you aren't going to back up EFS some other way)"
+  type        = bool
 }
