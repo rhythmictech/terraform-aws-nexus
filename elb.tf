@@ -1,6 +1,6 @@
 resource "aws_security_group" "elb" {
   name_prefix = "${var.name}-elb-sg"
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
 
   tags = merge(
     var.tags,
@@ -8,7 +8,7 @@ resource "aws_security_group" "elb" {
       "Name", "${var.name}-elb-sg"
     )
   )
-  
+
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
     from_port   = 443
@@ -52,7 +52,7 @@ resource "aws_lb_listener" "this" {
 }
 
 resource "aws_lb_target_group" "this" {
-  name_prefix = substr(var.name,0,6)
+  name_prefix = substr(var.name, 0, 6)
   port        = "80"
   protocol    = "HTTP"
   tags        = var.tags
@@ -70,4 +70,3 @@ resource "aws_lb_target_group" "this" {
     create_before_destroy = true
   }
 }
-

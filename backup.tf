@@ -43,16 +43,16 @@ resource "aws_backup_plan" "this" {
     schedule          = var.efs_backup_schedule
     target_vault_name = var.efs_backup_vault_name
     lifecycle {
-      delete_after       = var.efs_backup_retain_days
+      delete_after = var.efs_backup_retain_days
     }
   }
 }
 
 resource "aws_backup_selection" "this" {
-  count = var.enable_efs_backups ? 1 : 0
+  count        = var.enable_efs_backups ? 1 : 0
   name         = "${var.name}-EFS-backup"
   iam_role_arn = aws_iam_role.backup[0].arn
   plan_id      = aws_backup_plan.this[0].id
-  resources = [aws_efs_file_system.this.arn]
+  resources    = [aws_efs_file_system.this.arn]
 
 }

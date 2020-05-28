@@ -6,9 +6,9 @@ locals {
 
   configure_script = templatefile("${path.module}/templates/configureNexus.sh.tpl",
     {
-      export      = aws_efs_file_system.this.id
+      export         = aws_efs_file_system.this.id
       license_secret = var.license_secret
-      mount_point = "/opt/nexus/sonatype-work"
+      mount_point    = "/opt/nexus/sonatype-work"
     }
   )
 }
@@ -78,4 +78,3 @@ resource "aws_launch_configuration" "this" {
     create_before_destroy = true
   }
 }
-
