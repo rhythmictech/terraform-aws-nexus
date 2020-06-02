@@ -117,7 +117,7 @@ variable "efs_additional_allowed_security_groups" {
 variable "efs_backup_retain_days" {
   default     = 30
   description = "Days to retain EFS backups for (only used if `enable_efs_backups=true`)"
-  type        = bool
+  type        = number
 }
 
 variable "efs_backup_schedule" {
