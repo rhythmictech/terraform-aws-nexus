@@ -64,7 +64,7 @@ module "example" {
 | asg\_min\_size | Minimum number of instances in the autoscaling group | `number` | `1` | no |
 | asg\_subnets | Subnets to associate ASG instances with (specify 1 or more) | `list(string)` | n/a | yes |
 | efs\_additional\_allowed\_security\_groups | Additional security group IDs to attach to the EFS export | `list(string)` | `[]` | no |
-| efs\_backup\_retain\_days | Days to retain EFS backups for (only used if `enable_efs_backups=true`) | `bool` | `30` | no |
+| efs\_backup\_retain\_days | Days to retain EFS backups for (only used if `enable_efs_backups=true`) | `number` | `30` | no |
 | efs\_backup\_schedule | AWS Backup cron schedule (only used if `enable_efs_backups=true`) | `string` | `"cron(0 5 ? * * *)"` | no |
 | efs\_backup\_vault\_name | AWS Backup vault name (only used if `enable_efs_backups=true`) | `string` | `"nexus-efs-vault"` | no |
 | efs\_subnets | Subnets to create EFS mountpoints in | `list(string)` | n/a | yes |
