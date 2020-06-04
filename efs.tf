@@ -11,10 +11,12 @@ locals {
 
 resource "aws_security_group" "efs" {
   name_prefix = local.efs_name
+  description = "Attached to the Nexus EFS mount points"
   tags        = local.efs_tags
   vpc_id      = var.vpc_id
 
   ingress {
+    description     = "Allow traffic from Nexus instances and other specified groups"
     from_port       = 2049
     protocol        = "TCP"
     security_groups = concat([aws_security_group.this.id], var.efs_additional_allowed_security_groups)
