@@ -1,7 +1,3 @@
-
-data "aws_caller_identity" "current" {
-}
-
 locals {
 
   configure_script = templatefile("${path.module}/templates/configureNexus.sh.tpl",

@@ -16,6 +16,7 @@ variable "tags" {
 ########################################
 # Nexus Vars
 ########################################
+
 variable "license_secret" {
   default     = ""
   description = "S3 key including any prefix that has the Nexus Pro license (omit for OSS installs)"
@@ -81,6 +82,18 @@ variable "asg_subnets" {
 ########################################
 # Networking Vars
 ########################################
+
+variable "elb_additional_sg_tags" {
+  default     = {}
+  description = "Additional tags to apply to the ELB security group. Useful if you use an external process to manage ingress rules."
+  type        = map(string)
+}
+
+variable "elb_allowed_cidr_blocks" {
+  default     = ["0.0.0.0/0"]
+  description = "List of allowed CIDR blocks. If `[]` is specified, no inbound ingress rules will be created"
+  type        = list(string)
+}
 
 variable "elb_certificate" {
   description = "ARN of certificate to associate with ELB"
