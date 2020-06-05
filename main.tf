@@ -20,7 +20,7 @@ data "template_cloudinit_config" "this" {
 resource "aws_autoscaling_group" "this" {
   name_prefix               = var.name
   desired_capacity          = var.asg_desired_capacity
-  health_check_grace_period = 300
+  health_check_grace_period = 600
   health_check_type         = "ELB"
   force_delete              = false
   launch_configuration      = aws_launch_configuration.this.name
