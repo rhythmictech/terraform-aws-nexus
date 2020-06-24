@@ -27,14 +27,13 @@ resource "aws_security_group_rule" "elb_egress" {
 resource "aws_security_group_rule" "elb_ingress" {
   count = length(var.elb_allowed_cidr_blocks) > 0 ? 1 : 0
 
-  cidr_blocks              = var.elb_allowed_cidr_blocks #tfsec:ignore:AWS007
-  description              = "Allow traffic from the allowed ranges"
-  from_port                = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.elb.id
-  source_security_group_id = aws_security_group.this.id
-  to_port                  = 443
-  type                     = "egress"
+  cidr_blocks       = var.elb_allowed_cidr_blocks #tfsec:ignore:AWS006
+  description       = "Allow traffic from the allowed ranges"
+  from_port         = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.elb.id
+  to_port           = 443
+  type              = "ingress"
 }
 
 resource "aws_lb" "this" {
@@ -62,10 +61,12 @@ resource "aws_lb_listener" "this" {
 
 resource "aws_lb_target_group" "this" {
   name_prefix = substr(var.name, 0, 6)
-  port        = "80"
-  protocol    = "HTTP"
-  tags        = var.tags
-  vpc_id      = var.vpc_id
+  # Nexus has a bad time if two instances are running at once, so the deregistration delay needs to be short
+  deregistration_delay = 10
+  port                 = "80"
+  protocol             = "HTTP"
+  tags                 = var.tags
+  vpc_id               = var.vpc_id
 
   health_check {
     healthy_threshold = 2
