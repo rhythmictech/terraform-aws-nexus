@@ -42,13 +42,15 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.26 |
+| aws | >= 2.45.0, < 4.0.0 |
+| template | ~>2.1.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
-| template | n/a |
+| aws | >= 2.45.0, < 4.0.0 |
+| template | ~>2.1.2 |
 
 ## Inputs
 
