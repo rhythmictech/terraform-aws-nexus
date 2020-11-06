@@ -76,6 +76,7 @@ module "example" {
 | elb\_allowed\_cidr\_blocks | List of allowed CIDR blocks. If `[]` is specified, no inbound ingress rules will be created | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | elb\_internal | Create as an internal or internet-facing ELB | `bool` | `true` | no |
 | enable\_efs\_backups | Enable EFS backups using AWS Backup (recommended if you aren't going to back up EFS some other way) | `bool` | `false` | no |
+| extra\_userdata | Extra userdata as plain text | `string` | `""` | no |
 | license\_secret | S3 key including any prefix that has the Nexus Pro license (omit for OSS installs) | `string` | `""` | no |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 

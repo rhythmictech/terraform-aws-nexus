@@ -117,6 +117,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "extra_userdata" {
+  default     = ""
+  description = "Extra userdata as plain text"
+  type        = string
+}
+
 ########################################
 # EFS Vars
 ########################################
