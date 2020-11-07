@@ -73,6 +73,7 @@ module "example" {
 | vpc\_id | VPC to create associated resources in | `string` | n/a | yes |
 | asg\_additional\_iam\_policies | Additional IAM policies to attach to the  ASG instance profile | `list(string)` | `[]` | no |
 | asg\_additional\_security\_groups | Additional security group IDs to attach to ASG instances | `list(string)` | `[]` | no |
+| asg\_additional\_user\_data | Additional User Data to attach to the launch template | `string` | `""` | no |
 | asg\_desired\_capacity | The number of Amazon EC2 instances that should be running in the group. | `number` | `1` | no |
 | asg\_instance\_type | Instance type for scim app | `string` | `"t3a.micro"` | no |
 | asg\_key\_name | Optional keypair to associate with instances | `string` | `null` | no |
@@ -86,7 +87,6 @@ module "example" {
 | elb\_allowed\_cidr\_blocks | List of allowed CIDR blocks. If `[]` is specified, no inbound ingress rules will be created | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | elb\_internal | Create as an internal or internet-facing ELB | `bool` | `true` | no |
 | enable\_efs\_backups | Enable EFS backups using AWS Backup (recommended if you aren't going to back up EFS some other way) | `bool` | `false` | no |
-| extra\_userdata | Extra userdata as plain text | `string` | `""` | no |
 | license\_secret | S3 key including any prefix that has the Nexus Pro license (omit for OSS installs) | `string` | `""` | no |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 

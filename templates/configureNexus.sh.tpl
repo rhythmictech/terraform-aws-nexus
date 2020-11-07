@@ -24,6 +24,3 @@ END
         --query SecretBinary --output text | base64 -d > /opt/nexus/sonatype-work/nexus3/nexus.lic
 
 fi
-
-echo "running extra userdata"
-${extra_userdata}

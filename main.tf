@@ -5,7 +5,6 @@ locals {
       export         = aws_efs_file_system.this.id
       license_secret = var.license_secret
       mount_point    = "/opt/nexus/sonatype-work"
-      extra_userdata = var.extra_userdata
     }
   )
 }
@@ -15,6 +14,11 @@ data "template_cloudinit_config" "this" {
   part {
     filename = "text/x-shellscript"
     content  = local.configure_script
+  }
+
+  part {
+    content_type = "text/x-shellscript"
+    content      = var.asg_additional_user_data
   }
 }
 
