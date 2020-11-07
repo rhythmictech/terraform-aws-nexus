@@ -1,13 +1,13 @@
 # terraform-aws-nexus
 
-Create a Nexus OSS or Nexus Pro instance. This does some neat things:
-
 [![tflint](https://github.com/rhythmictech/terraform-aws-nexus/workflows/tflint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Atflint+event%3Apush+branch%3Amaster)
 [![tfsec](https://github.com/rhythmictech/terraform-aws-nexus/workflows/tfsec/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Atfsec+event%3Apush+branch%3Amaster)
 [![yamllint](https://github.com/rhythmictech/terraform-aws-nexus/workflows/yamllint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Ayamllint+event%3Apush+branch%3Amaster)
 [![misspell](https://github.com/rhythmictech/terraform-aws-nexus/workflows/misspell/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Amisspell+event%3Apush+branch%3Amaster)
 [![pre-commit-check](https://github.com/rhythmictech/terraform-aws-nexus/workflows/pre-commit-check/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Apre-commit-check+event%3Apush+branch%3Amaster)
 <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=twitter" alt="follow on Twitter"></a>
+
+Create a Nexus OSS or Nexus Pro instance. This does some neat things:
 
 
 * `sonatype-work` directory is managed by EFS with optional backups using AWS Backup
