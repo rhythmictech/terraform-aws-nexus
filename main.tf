@@ -15,6 +15,11 @@ data "template_cloudinit_config" "this" {
     filename = "text/x-shellscript"
     content  = local.configure_script
   }
+
+  part {
+    content_type = "text/x-shellscript"
+    content      = var.asg_additional_user_data
+  }
 }
 
 resource "aws_autoscaling_group" "this" {

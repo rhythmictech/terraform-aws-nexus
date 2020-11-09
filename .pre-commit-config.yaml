@@ -33,6 +33,7 @@ repos:
               cd $(dirname "$FILE")
               terraform init --backend=false
               terraform validate .
+              cd ..
             done
           '
         language: system
@@ -50,11 +51,17 @@ repos:
         args:
           - --unsafe
       - id: end-of-file-fixer
-      - id: trailing-whitespace
       - id: mixed-line-ending
         args:
           - --fix=lf
       - id: no-commit-to-branch
+        args:
+          - --branch
+          - main
+          - --branch
+          - master
+          - --branch
+          - prod
       - id: pretty-format-json
         args:
           - --autofix

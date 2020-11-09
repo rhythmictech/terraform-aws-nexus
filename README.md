@@ -1,6 +1,14 @@
-# terraform-aws-nexus [![](https://github.com/rhythmictech/terraform-aws-nexus/workflows/pre-commit-check/badge.svg)](https://github.com/rhythmictech/terraform-aws-nexus/actions) <a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=RhythmicTech" alt="follow on Twitter"></a>
+# terraform-aws-nexus
+
+[![tflint](https://github.com/rhythmictech/terraform-aws-nexus/workflows/tflint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Atflint+event%3Apush+branch%3Amaster)
+[![tfsec](https://github.com/rhythmictech/terraform-aws-nexus/workflows/tfsec/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Atfsec+event%3Apush+branch%3Amaster)
+[![yamllint](https://github.com/rhythmictech/terraform-aws-nexus/workflows/yamllint/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Ayamllint+event%3Apush+branch%3Amaster)
+[![misspell](https://github.com/rhythmictech/terraform-aws-nexus/workflows/misspell/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Amisspell+event%3Apush+branch%3Amaster)
+[![pre-commit-check](https://github.com/rhythmictech/terraform-aws-nexus/workflows/pre-commit-check/badge.svg?branch=master&event=push)](https://github.com/rhythmictech/terraform-aws-nexus/actions?query=workflow%3Apre-commit-check+event%3Apush+branch%3Amaster)
+<a href="https://twitter.com/intent/follow?screen_name=RhythmicTech"><img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 Create a Nexus OSS or Nexus Pro instance. This does some neat things:
+
 
 * `sonatype-work` directory is managed by EFS with optional backups using AWS Backup
 * everything runs in an ASG (though HA isn't supported.. yet..) so if something happens to the instance, it'll come back up automatically.
@@ -42,13 +50,15 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.26 |
+| aws | >= 2.45.0, < 4.0.0 |
+| template | ~>2.1.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
-| template | n/a |
+| aws | >= 2.45.0, < 4.0.0 |
+| template | ~>2.1.2 |
 
 ## Inputs
 
@@ -63,6 +73,7 @@ module "example" {
 | vpc\_id | VPC to create associated resources in | `string` | n/a | yes |
 | asg\_additional\_iam\_policies | Additional IAM policies to attach to the  ASG instance profile | `list(string)` | `[]` | no |
 | asg\_additional\_security\_groups | Additional security group IDs to attach to ASG instances | `list(string)` | `[]` | no |
+| asg\_additional\_user\_data | Additional User Data to attach to the launch template | `string` | `""` | no |
 | asg\_desired\_capacity | The number of Amazon EC2 instances that should be running in the group. | `number` | `1` | no |
 | asg\_instance\_type | Instance type for scim app | `string` | `"t3a.micro"` | no |
 | asg\_key\_name | Optional keypair to associate with instances | `string` | `null` | no |

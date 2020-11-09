@@ -44,6 +44,12 @@ variable "asg_additional_security_groups" {
   type        = list(string)
 }
 
+variable "asg_additional_user_data" {
+  default     = ""
+  description = "Additional User Data to attach to the launch template"
+  type        = string
+}
+
 variable "asg_desired_capacity" {
   default     = 1
   description = "The number of Amazon EC2 instances that should be running in the group."
