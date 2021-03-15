@@ -40,7 +40,7 @@ resource "aws_backup_plan" "this" {
   tags = var.tags
 
   rule {
-    rule_name         = "${var.name} EFS backup"
+    rule_name         = "${var.name}-EFS-backup"
     schedule          = var.efs_backup_schedule
     target_vault_name = var.efs_backup_vault_name
 
