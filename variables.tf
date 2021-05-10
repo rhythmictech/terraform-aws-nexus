@@ -89,6 +89,24 @@ variable "asg_subnets" {
 # Networking Vars
 ########################################
 
+variable "access_logs_bucket" {
+  default     = null
+  description = "The name of the bucket to store LB access logs in. Required if `access_logs_enabled` is `true`"
+  type        = string
+}
+
+variable "access_logs_enabled" {
+  default     = false
+  description = "Whether to enable LB access logging"
+  type        = bool
+}
+
+variable "access_logs_prefix" {
+  default     = null
+  description = "The path prefix to apply to the LB access logs."
+  type        = string
+}
+
 variable "elb_additional_sg_tags" {
   default     = {}
   description = "Additional tags to apply to the ELB security group. Useful if you use an external process to manage ingress rules."
