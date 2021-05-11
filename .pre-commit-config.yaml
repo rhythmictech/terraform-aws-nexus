@@ -1,17 +1,26 @@
+exclude: ".terraform"
+ci:
+  # many of these are covered by better reviewdog linters below
+  skip:
+    - terraform_tflint
+    - no-commit-to-branch
+    - terraform_tfsec
+
 repos:
+  - repo: local
+    hooks:
+      - id: install_prereqs
+        name: install_prereqs
+        entry: ./bin/install.sh
+        language: script
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.31.0
+    rev: v1.50.0
     hooks:
       - id: terraform_docs
         always_run: true
         args:
-          - --args=--sort-by-required
+          - --args=--sort-by required
       - id: terraform_fmt
-      - id: terraform_tflint
-        alias: terraform_tflint_deep
-        name: terraform_tflint_deep
-        args:
-          - --args=--deep
       - id: terraform_tflint
         alias: terraform_tflint_nocreds
         name: terraform_tflint_nocreds
@@ -41,7 +50,7 @@ repos:
         files: \.tf(vars)?$
         exclude: examples
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.0.0
+    rev: v3.4.0
     hooks:
       - id: check-case-conflict
       - id: check-json
