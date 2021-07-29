@@ -44,6 +44,12 @@ variable "asg_additional_security_groups" {
   type        = list(string)
 }
 
+variable "asg_additional_target_group_arns" {
+  default     = []
+  description = "ARNs of additional target groups to attach to the ASG"
+  type        = list(string)
+}
+
 variable "asg_additional_user_data" {
   default     = ""
   description = "Additional User Data to attach to the launch template"

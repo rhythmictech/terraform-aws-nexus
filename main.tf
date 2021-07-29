@@ -31,7 +31,7 @@ resource "aws_autoscaling_group" "this" {
   launch_configuration      = aws_launch_configuration.this.name
   max_size                  = var.asg_max_size
   min_size                  = var.asg_min_size
-  target_group_arns         = [aws_lb_target_group.this.arn]
+  target_group_arns         = concat(var.asg_additional_target_group_arns, [aws_lb_target_group.this.arn])
   wait_for_capacity_timeout = "15m"
   vpc_zone_identifier       = var.asg_subnets
 

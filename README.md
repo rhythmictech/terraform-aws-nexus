@@ -110,6 +110,7 @@ No modules.
 | <a name="input_access_logs_prefix"></a> [access\_logs\_prefix](#input\_access\_logs\_prefix) | The path prefix to apply to the LB access logs. | `string` | `null` | no |
 | <a name="input_asg_additional_iam_policies"></a> [asg\_additional\_iam\_policies](#input\_asg\_additional\_iam\_policies) | Additional IAM policies to attach to the  ASG instance profile | `list(string)` | `[]` | no |
 | <a name="input_asg_additional_security_groups"></a> [asg\_additional\_security\_groups](#input\_asg\_additional\_security\_groups) | Additional security group IDs to attach to ASG instances | `list(string)` | `[]` | no |
+| <a name="input_asg_additional_target_group_arns"></a> [asg\_additional\_target\_group\_arns](#input\_asg\_additional\_target\_group\_arns) | ARNs of additional target groups to attach to the ASG | `list(string)` | `[]` | no |
 | <a name="input_asg_additional_user_data"></a> [asg\_additional\_user\_data](#input\_asg\_additional\_user\_data) | Additional User Data to attach to the launch template | `string` | `""` | no |
 | <a name="input_asg_desired_capacity"></a> [asg\_desired\_capacity](#input\_asg\_desired\_capacity) | The number of Amazon EC2 instances that should be running in the group. | `number` | `1` | no |
 | <a name="input_asg_instance_type"></a> [asg\_instance\_type](#input\_asg\_instance\_type) | Instance type for scim app | `string` | `"t3a.micro"` | no |
