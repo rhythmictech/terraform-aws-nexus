@@ -17,3 +17,8 @@ output "role_arn" {
   description = "IAM Role ARN of Nexus instance"
   value       = aws_iam_role.this.arn
 }
+
+output "sg_arn" {
+  description = "Security Group ARN"
+  value       = aws_security_group.elb.arn
+}

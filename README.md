@@ -135,4 +135,5 @@ No modules.
 | <a name="output_lb_dns_name"></a> [lb\_dns\_name](#output\_lb\_dns\_name) | DNS Name of the ELB for Nexus access |
 | <a name="output_lb_zone_id"></a> [lb\_zone\_id](#output\_lb\_zone\_id) | Route53 Zone ID of the ELB for Nexus access |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | IAM Role ARN of Nexus instance |
+| <a name="output_sg_arn"></a> [sg\_arn](#output\_sg\_arn) | Security Group ARN |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
