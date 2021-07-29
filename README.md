@@ -17,7 +17,7 @@ Create a Nexus OSS or Nexus Pro instance. This does some neat things:
 
 ## Requirements
 
-This expects an instance that has Nexus pre-installed using the Rhythmic [ansible-role-nexus](https://github.com/rhythmictech/ansible-role-nexus) ansible module. The easiest way to get one is to use Packer.
+This expects an instance that has Nexus pre-installed using the Rhythmic [ansible-role-nexus](https://github.com/rhythmictech/ansible-role-nexus3) ansible module. The easiest way to get one is to use Packer.
 
 ## License File (Pro only)
 To use Pro, you need to save your license file in AWS Secrets Manager. Something like this would work:
