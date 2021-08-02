@@ -123,7 +123,7 @@ resource "aws_lb_listener" "additional_this" {
   protocol          = "HTTP" #tfsec:ignore:AWS004
 
   default_action {
-    target_group_arn = aws_lb_target_group.this.id
+    target_group_arn = aws_lb_target_group.additional_this[count.index].id
     type             = "forward"
   }
 }
