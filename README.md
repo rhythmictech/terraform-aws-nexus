@@ -81,11 +81,16 @@ No modules.
 | [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_launch_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration) | resource |
 | [aws_lb.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb) | resource |
+| [aws_lb_listener.additional_this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
 | [aws_lb_listener.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_target_group.additional_this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
 | [aws_lb_target_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
 | [aws_security_group.efs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.elb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.additional_allow_inbound_http_from_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.additional_elb_egress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.additional_elb_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.allow_all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.allow_inbound_http_from_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.elb_egress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
@@ -108,6 +113,7 @@ No modules.
 | <a name="input_access_logs_bucket"></a> [access\_logs\_bucket](#input\_access\_logs\_bucket) | The name of the bucket to store LB access logs in. Required if `access_logs_enabled` is `true` | `string` | `null` | no |
 | <a name="input_access_logs_enabled"></a> [access\_logs\_enabled](#input\_access\_logs\_enabled) | Whether to enable LB access logging | `bool` | `false` | no |
 | <a name="input_access_logs_prefix"></a> [access\_logs\_prefix](#input\_access\_logs\_prefix) | The path prefix to apply to the LB access logs. | `string` | `null` | no |
+| <a name="input_additional_ports"></a> [additional\_ports](#input\_additional\_ports) | Additional ports (besides 80/443 for the UI) to open on the nexus instance and create listeners for | `list(number)` | `[]` | no |
 | <a name="input_asg_additional_iam_policies"></a> [asg\_additional\_iam\_policies](#input\_asg\_additional\_iam\_policies) | Additional IAM policies to attach to the  ASG instance profile | `list(string)` | `[]` | no |
 | <a name="input_asg_additional_security_groups"></a> [asg\_additional\_security\_groups](#input\_asg\_additional\_security\_groups) | Additional security group IDs to attach to ASG instances | `list(string)` | `[]` | no |
 | <a name="input_asg_additional_target_group_arns"></a> [asg\_additional\_target\_group\_arns](#input\_asg\_additional\_target\_group\_arns) | ARNs of additional target groups to attach to the ASG | `list(string)` | `[]` | no |

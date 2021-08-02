@@ -27,6 +27,12 @@ variable "license_secret" {
 # ASG Vars
 ########################################
 
+variable "additional_ports" {
+  default     = []
+  description = "Additional ports (besides 80/443 for the UI) to open on the nexus instance and create listeners for"
+  type        = list(number)
+}
+
 variable "ami_id" {
   description = "AMI to build on (must have `ansible-role-nexus` module installed)"
   type        = string

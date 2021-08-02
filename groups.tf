@@ -34,3 +34,15 @@ resource "aws_security_group_rule" "allow_inbound_http_from_lb" {
   to_port                  = 80
   type                     = "ingress"
 }
+
+resource "aws_security_group_rule" "additional_allow_inbound_http_from_lb" {
+  count = length(var.additional_ports)
+
+  description              = "Allow traffic from the load balancer on port ${var.additional_ports[count.index]}"
+  from_port                = var.additional_ports[count.index]
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.this.id
+  source_security_group_id = aws_security_group.elb.id
+  to_port                  = var.additional_ports[count.index]
+  type                     = "ingress"
+}
