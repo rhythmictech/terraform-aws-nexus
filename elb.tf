@@ -129,6 +129,8 @@ resource "aws_lb_listener" "additional_this" {
 }
 
 resource "aws_lb_target_group" "additional_this" {
+  count = length(var.additional_ports)
+
   name_prefix = substr(var.name, 0, 6)
   # Nexus has a bad time if two instances are running at once, so the deregistration delay needs to be short
   deregistration_delay = 10

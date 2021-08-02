@@ -73,7 +73,6 @@ resource "aws_launch_configuration" "this" {
   security_groups = concat(
     var.asg_additional_security_groups,
     [aws_security_group.this.id],
-    aws_security_group.additional_this.*.id
   )
 
   root_block_device {
