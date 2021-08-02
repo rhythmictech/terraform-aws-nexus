@@ -37,7 +37,7 @@ resource "aws_autoscaling_group" "this" {
   target_group_arns = concat(
     var.asg_additional_target_group_arns,
     [aws_lb_target_group.this.arn],
-    aws_lb_target_group.additonal_this.*.arn
+    aws_lb_target_group.additional_this.*.arn
   )
 
   tag {
