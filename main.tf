@@ -72,12 +72,12 @@ resource "aws_launch_configuration" "this" {
 
   security_groups = concat(
     var.asg_additional_security_groups,
-    [aws_security_group.this.id],
+    [aws_security_group.this.id, ],
   )
 
   root_block_device {
     encrypted   = true
-    volume_type = "gp3"
+    volume_type = var.asg_root_volume_type
   }
 
   lifecycle {

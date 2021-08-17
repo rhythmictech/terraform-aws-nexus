@@ -123,6 +123,7 @@ No modules.
 | <a name="input_asg_key_name"></a> [asg\_key\_name](#input\_asg\_key\_name) | Optional keypair to associate with instances | `string` | `null` | no |
 | <a name="input_asg_max_size"></a> [asg\_max\_size](#input\_asg\_max\_size) | Maximum number of instances in the autoscaling group | `number` | `2` | no |
 | <a name="input_asg_min_size"></a> [asg\_min\_size](#input\_asg\_min\_size) | Minimum number of instances in the autoscaling group | `number` | `1` | no |
+| <a name="input_asg_root_volume_type"></a> [asg\_root\_volume\_type](#input\_asg\_root\_volume\_type) | This should match the root volume type of the AMI | `string` | `"gp3"` | no |
 | <a name="input_efs_additional_allowed_security_groups"></a> [efs\_additional\_allowed\_security\_groups](#input\_efs\_additional\_allowed\_security\_groups) | Additional security group IDs to attach to the EFS export | `list(string)` | `[]` | no |
 | <a name="input_efs_backup_retain_days"></a> [efs\_backup\_retain\_days](#input\_efs\_backup\_retain\_days) | Days to retain EFS backups for (only used if `enable_efs_backups=true`) | `number` | `30` | no |
 | <a name="input_efs_backup_schedule"></a> [efs\_backup\_schedule](#input\_efs\_backup\_schedule) | AWS Backup cron schedule (only used if `enable_efs_backups=true`) | `string` | `"cron(0 5 ? * * *)"` | no |

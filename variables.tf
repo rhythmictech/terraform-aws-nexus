@@ -97,6 +97,12 @@ variable "asg_subnets" {
   type        = list(string)
 }
 
+variable "asg_root_volume_type" {
+  default     = "gp3"
+  description = "This should match the root volume type of the AMI"
+  type        = string
+}
+
 ########################################
 # Networking Vars
 ########################################
