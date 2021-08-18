@@ -36,6 +36,30 @@ resource "aws_security_group_rule" "elb_ingress" {
   type              = "ingress"
 }
 
+resource "aws_security_group_rule" "additional_elb_egress" {
+  count = length(var.additional_ports)
+
+  description              = "Allow traffic from the ELB to the instances on port ${var.additional_ports[count.index]}"
+  from_port                = var.additional_ports[count.index]
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.elb.id
+  source_security_group_id = aws_security_group.this.id
+  to_port                  = var.additional_ports[count.index]
+  type                     = "egress"
+}
+
+resource "aws_security_group_rule" "additional_elb_ingress" {
+  count = length(var.elb_allowed_cidr_blocks) > 0 ? length(var.additional_ports) : 0
+
+  cidr_blocks       = var.elb_allowed_cidr_blocks #tfsec:ignore:AWS006
+  description       = "Allow traffic from ranges to port ${var.additional_ports[count.index]}"
+  from_port         = var.additional_ports[count.index]
+  protocol          = "tcp"
+  security_group_id = aws_security_group.elb.id
+  to_port           = var.additional_ports[count.index]
+  type              = "ingress"
+}
+
 resource "aws_lb" "this" {
   name_prefix                      = substr(var.name, 0, 6)
   enable_cross_zone_load_balancing = "true"
@@ -74,6 +98,43 @@ resource "aws_lb_target_group" "this" {
   # Nexus has a bad time if two instances are running at once, so the deregistration delay needs to be short
   deregistration_delay = 10
   port                 = "80"
+  protocol             = "HTTP"
+  tags                 = var.tags
+  vpc_id               = var.vpc_id
+
+  health_check {
+    healthy_threshold = 2
+    interval          = 15
+    matcher           = "200-299,302"
+    protocol          = "HTTP"
+    port              = "80"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener" "additional_this" {
+  count = length(var.additional_ports)
+
+  load_balancer_arn = aws_lb.this.id
+  port              = var.additional_ports[count.index]
+  protocol          = "HTTP" #tfsec:ignore:AWS004
+
+  default_action {
+    target_group_arn = aws_lb_target_group.additional_this[count.index].id
+    type             = "forward"
+  }
+}
+
+resource "aws_lb_target_group" "additional_this" {
+  count = length(var.additional_ports)
+
+  name_prefix = substr(var.name, 0, 6)
+  # Nexus has a bad time if two instances are running at once, so the deregistration delay needs to be short
+  deregistration_delay = 10
+  port                 = var.additional_ports[count.index]
   protocol             = "HTTP"
   tags                 = var.tags
   vpc_id               = var.vpc_id

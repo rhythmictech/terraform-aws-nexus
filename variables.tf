@@ -27,6 +27,12 @@ variable "license_secret" {
 # ASG Vars
 ########################################
 
+variable "additional_ports" {
+  default     = []
+  description = "Additional ports (besides 80/443 for the UI) to open on the nexus instance and create listeners for"
+  type        = list(number)
+}
+
 variable "ami_id" {
   description = "AMI to build on (must have `ansible-role-nexus` module installed)"
   type        = string
@@ -41,6 +47,12 @@ variable "asg_additional_iam_policies" {
 variable "asg_additional_security_groups" {
   default     = []
   description = "Additional security group IDs to attach to ASG instances"
+  type        = list(string)
+}
+
+variable "asg_additional_target_group_arns" {
+  default     = []
+  description = "ARNs of additional target groups to attach to the ASG"
   type        = list(string)
 }
 
@@ -83,6 +95,12 @@ variable "asg_min_size" {
 variable "asg_subnets" {
   description = "Subnets to associate ASG instances with (specify 1 or more)"
   type        = list(string)
+}
+
+variable "asg_root_volume_type" {
+  default     = "gp3"
+  description = "This should match the root volume type of the AMI"
+  type        = string
 }
 
 ########################################
