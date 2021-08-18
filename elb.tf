@@ -120,7 +120,7 @@ resource "aws_lb_listener" "additional_this" {
 
   load_balancer_arn = aws_lb.this.id
   port              = var.additional_ports[count.index]
-  protocol          = "HTTP" #tfsec:ignore:AWS004
+  protocol          = var.additional_ports_protocol
 
   default_action {
     target_group_arn = aws_lb_target_group.additional_this[count.index].id

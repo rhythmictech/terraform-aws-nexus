@@ -33,6 +33,13 @@ variable "additional_ports" {
   type        = list(number)
 }
 
+variable "additional_ports_protocol" {
+  default     = "HTTPS"
+  description = "Protocol [HTTP, HTTPS] to use for the additional ports"
+  type        = string
+}
+
+
 variable "ami_id" {
   description = "AMI to build on (must have `ansible-role-nexus` module installed)"
   type        = string
