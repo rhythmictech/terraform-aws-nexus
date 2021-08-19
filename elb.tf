@@ -118,9 +118,11 @@ resource "aws_lb_target_group" "this" {
 resource "aws_lb_listener" "additional_this" {
   count = length(var.additional_ports)
 
+  certificate_arn   = var.elb_certificate
   load_balancer_arn = aws_lb.this.id
   port              = var.additional_ports[count.index]
-  protocol          = "HTTP" #tfsec:ignore:AWS004
+  protocol          = var.additional_ports_protocol
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
 
   default_action {
     target_group_arn = aws_lb_target_group.additional_this[count.index].id
