@@ -5,6 +5,10 @@ mkdir -p ${mount_point}
 mount -t efs ${export}:/ ${mount_point}
 echo "${export}:/ ${mount_point} efs default,_netdev,nofail 0 0" >> /etc/fstab
 
+chown nexus:nexus /opt/nexus/sonatype-work
+
+systemctl restart nexus
+
 echo "Checking if license is provided"
 if [ -z "${license_secret}"] ; then
 
