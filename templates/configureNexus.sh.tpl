@@ -5,6 +5,9 @@ mkdir -p ${mount_point}
 mount -t efs ${export}:/ ${mount_point}
 echo "${export}:/ ${mount_point} efs default,_netdev,nofail 0 0" >> /etc/fstab
 
+mkdir -m 0750 -p ${mount_point}/nexus-server
+chown nexus:nexus ${mount_point}/nexus-server
+
 systemctl restart nexus
 
 echo "Checking if license is provided"
