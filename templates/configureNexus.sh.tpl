@@ -5,7 +5,6 @@ mkdir -p ${mount_point}
 mount -t efs ${export}:/ ${mount_point}
 echo "${export}:/ ${mount_point} efs default,_netdev,nofail 0 0" >> /etc/fstab
 
-chown nexus:nexus /opt/nexus/sonatype-work
 
 systemctl restart nexus
 
@@ -28,3 +27,5 @@ END
         --query SecretBinary --output text | base64 -d > /opt/nexus/sonatype-work/nexus3/nexus.lic
 
 fi
+
+chown -R nexus:nexus /opt/nexus/sonatype-work
