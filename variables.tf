@@ -160,6 +160,12 @@ variable "elb_subnets" {
   type        = list(string)
 }
 
+variable "elb_to_ec2_port" {
+  default     = 80
+  description = "Subnets to associate ELB to"
+  type        = number
+}
+
 
 variable "vpc_id" {
   description = "VPC to create associated resources in"
