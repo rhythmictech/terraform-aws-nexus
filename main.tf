@@ -76,8 +76,9 @@ resource "aws_launch_configuration" "this" {
   )
 
   root_block_device {
-    encrypted   = true
-    volume_type = var.asg_root_volume_type
+    encrypted   = var.root_volume_encryption
+    volume_type = var.root_volume_type
+    volume_size = var.root_volume_size
   }
 
   lifecycle {

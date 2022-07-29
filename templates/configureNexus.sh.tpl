@@ -3,7 +3,7 @@
 yum install -y amazon-efs-utils
 mkdir -p ${mount_point}
 mount -t efs ${export}:/ ${mount_point}
-echo "${export}:/ ${mount_point} efs default,_netdev,nofail 0 0" >> /etc/fstab
+echo "${export}:/ ${mount_point} efs defaults,_netdev 0 0" >> /etc/fstab
 
 
 systemctl restart nexus
