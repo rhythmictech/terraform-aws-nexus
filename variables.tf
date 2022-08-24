@@ -210,13 +210,13 @@ variable "root_volume_encryption" {
 }
 
 variable "root_volume_size" {
-  default     = null
+  default     = 8
   description = "Size of the root volume"
   type        = number
 }
 
 variable "root_volume_type" {
-  default     = "gp2"
+  default     = "gp3"
   description = "Size of the root volume"
   type        = string
 }
