@@ -104,12 +104,6 @@ variable "asg_subnets" {
   type        = list(string)
 }
 
-variable "asg_root_volume_type" {
-  default     = "gp3"
-  description = "This should match the root volume type of the AMI"
-  type        = string
-}
-
 ########################################
 # Networking Vars
 ########################################
@@ -203,4 +197,26 @@ variable "enable_efs_backups" {
   default     = false
   description = "Enable EFS backups using AWS Backup (recommended if you aren't going to back up EFS some other way)"
   type        = bool
+}
+
+########################################
+# RootVolume Vars
+########################################
+
+variable "root_volume_encryption" {
+  default     = true
+  description = "Encrypted root volume"
+  type        = bool
+}
+
+variable "root_volume_size" {
+  default     = 8
+  description = "Size of the root volume"
+  type        = number
+}
+
+variable "root_volume_type" {
+  default     = "gp3"
+  description = "Size of the root volume"
+  type        = string
 }
