@@ -5,9 +5,9 @@ resource "aws_security_group" "this" {
 
   tags = merge(
     var.tags,
-    map(
-      "Name", "${var.name}-nexus-sg"
-    )
+    tomap({
+      "Name" = "${var.name}-nexus-sg"
+    })
   )
 
   lifecycle {

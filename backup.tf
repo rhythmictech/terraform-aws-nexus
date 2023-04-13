@@ -36,7 +36,7 @@ resource "aws_backup_vault" "this" {
 resource "aws_backup_plan" "this" {
   count = var.enable_efs_backups ? 1 : 0
 
-  name = "${var.name} backup"
+  name = "${var.name}-backup"
   tags = var.tags
 
   rule {
