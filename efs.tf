@@ -10,6 +10,8 @@ locals {
 }
 
 resource "aws_security_group" "efs" {
+  count = var.ebs_data_volume ? 0 : 1
+
   name_prefix = local.efs_name
   description = "Attached to the Nexus EFS mount points"
   tags        = local.efs_tags
@@ -29,13 +31,15 @@ resource "aws_security_group" "efs" {
 }
 
 resource "aws_efs_file_system" "this" {
+  count = var.ebs_data_volume ? 0 : 1
+
   encrypted = true
   tags      = local.efs_tags
 }
 
 resource "aws_efs_mount_target" "this" {
-  count           = length(var.efs_subnets)
-  file_system_id  = aws_efs_file_system.this.id
+  count           = var.ebs_data_volume ? 0 : length(var.efs_subnets)
+  file_system_id  = aws_efs_file_system.this[0].id
   subnet_id       = var.efs_subnets[count.index]
-  security_groups = [aws_security_group.efs.id]
+  security_groups = [aws_security_group.efs[0].id]
 }

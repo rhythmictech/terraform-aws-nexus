@@ -2,11 +2,17 @@ locals {
 
   configure_script = templatefile("${path.module}/templates/configureNexus.sh.tpl",
     {
-      export         = aws_efs_file_system.this.id
+      ebs_data_volume = var.ebs_data_volume
+      export         = var.ebs_data_volume ? "null" : aws_efs_file_system.this[0].id
       license_secret = var.license_secret
       mount_point    = "/opt/nexus/sonatype-work"
+      region         = data.aws_region.current.name
+      volume_id      = var.ebs_data_volume ? aws_ebs_volume.data[0].id : "null"
     }
   )
+}
+
+data "aws_region" "current" {
 }
 
 data "template_cloudinit_config" "this" {
@@ -45,6 +51,11 @@ resource "aws_autoscaling_group" "this" {
     value               = var.name
     propagate_at_launch = true
   }
+  tag {
+  key                 = "VolumeKey"
+  propagate_at_launch = true
+  value               = var.volume_key
+  }
 
   dynamic "tag" {
     for_each = var.tags
@@ -59,6 +70,21 @@ resource "aws_autoscaling_group" "this" {
   lifecycle {
     create_before_destroy = true
   }
+}
+
+
+resource "aws_ebs_volume" "data" {
+  count = var.ebs_data_volume ? 1 : 0
+
+  availability_zone = var.availability_zone
+  size              = var.ebs_volume_size
+
+  tags = merge(var.tags,
+    {
+      Name      = var.volume_key,
+      VolumeKey = var.volume_key
+    }
+  )
 }
 
 resource "aws_launch_configuration" "this" {
@@ -80,7 +106,6 @@ resource "aws_launch_configuration" "this" {
     volume_type = var.root_volume_type
     volume_size = var.root_volume_size
   }
-
   lifecycle {
     create_before_destroy = true
   }
