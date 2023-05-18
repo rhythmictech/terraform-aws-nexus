@@ -55,5 +55,5 @@ resource "aws_backup_selection" "this" {
   name         = "${var.name}-EFS-backup"
   iam_role_arn = aws_iam_role.backup[0].arn
   plan_id      = aws_backup_plan.this[0].id
-  resources    = [aws_efs_file_system.this.arn]
+  resources    = [aws_efs_file_system.this[0].arn]
 }

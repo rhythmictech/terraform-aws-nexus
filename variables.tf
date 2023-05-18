@@ -23,6 +23,13 @@ variable "license_secret" {
   type        = string
 }
 
+
+variable "volume_key" {
+  default     = "nexus-volume"
+  description = "This value is set to a key on the EBS volume and must be present for the nexus instance to be permitted to attach it."
+  type        = string
+}
+
 ########################################
 # ASG Vars
 ########################################
@@ -126,6 +133,12 @@ variable "access_logs_prefix" {
   type        = string
 }
 
+variable "availability_zone" {
+  default     = null
+  description = "Specify the availability zone that the instance will be deployed in if using an EBS volume"
+  type        = string
+}
+
 variable "elb_additional_sg_tags" {
   default     = {}
   description = "Additional tags to apply to the ELB security group. Useful if you use an external process to manage ingress rules."
@@ -158,6 +171,20 @@ variable "elb_subnets" {
 variable "vpc_id" {
   description = "VPC to create associated resources in"
   type        = string
+}
+
+########################################
+# EBS Vars
+########################################
+variable "ebs_data_volume" {
+  default     = false
+  description = "Whether to use EBS instead of EFS"
+  type        = bool
+}
+
+variable "ebs_volume_size" {
+  description = "Size of Nexus data volume in GB"
+  type        = number
 }
 
 ########################################
