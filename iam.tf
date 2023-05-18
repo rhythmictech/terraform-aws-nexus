@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "ebs" {
 }
 
 resource "aws_iam_policy" "ebs" {
-  count = var.ebs_data_volume ? 1 : 0
+  count       = var.ebs_data_volume ? 1 : 0
   name_prefix = var.name
 
   description = "IAM policy for EBS attachment on Nexus servers"

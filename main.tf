@@ -3,11 +3,11 @@ locals {
   configure_script = templatefile("${path.module}/templates/configureNexus.sh.tpl",
     {
       ebs_data_volume = var.ebs_data_volume
-      export         = var.ebs_data_volume ? "null" : aws_efs_file_system.this[0].id
-      license_secret = var.license_secret
-      mount_point    = "/opt/nexus/sonatype-work"
-      region         = data.aws_region.current.name
-      volume_id      = var.ebs_data_volume ? aws_ebs_volume.data[0].id : "null"
+      export          = var.ebs_data_volume ? "null" : aws_efs_file_system.this[0].id
+      license_secret  = var.license_secret
+      mount_point     = "/opt/nexus/sonatype-work"
+      region          = data.aws_region.current.name
+      volume_id       = var.ebs_data_volume ? aws_ebs_volume.data[0].id : "null"
     }
   )
 }
@@ -52,9 +52,9 @@ resource "aws_autoscaling_group" "this" {
     propagate_at_launch = true
   }
   tag {
-  key                 = "VolumeKey"
-  propagate_at_launch = true
-  value               = var.volume_key
+    key                 = "VolumeKey"
+    propagate_at_launch = true
+    value               = var.volume_key
   }
 
   dynamic "tag" {

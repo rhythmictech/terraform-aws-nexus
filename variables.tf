@@ -134,7 +134,7 @@ variable "access_logs_prefix" {
 }
 
 variable "availability_zone" {
-  default = null
+  default     = null
   description = "Specify the availability zone that the instance will be deployed in if using an EBS volume"
   type        = string
 }
