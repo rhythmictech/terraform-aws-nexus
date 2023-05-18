@@ -52,9 +52,9 @@ resource "aws_autoscaling_group" "this" {
     propagate_at_launch = true
   }
   tag {
-  key                 = "VolumeKey"
-  propagate_at_launch = true
-  value               = var.volume_key
+    key                 = "VolumeKey"
+    propagate_at_launch = true
+    value               = var.volume_key
   }
 
   dynamic "tag" {
