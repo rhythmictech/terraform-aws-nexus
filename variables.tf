@@ -111,6 +111,18 @@ variable "asg_subnets" {
   type        = list(string)
 }
 
+variable "enabled_metrics" {
+  description = "List of enabled metrics for the Auto Scaling Group"
+  type        = list(string)
+  default     = []
+}
+
+variable "user_data" {
+  description = "User data to configure the EC2 instances of Nexus"
+  type        = string
+  default     = ""
+}
+
 ########################################
 # Networking Vars
 ########################################
@@ -131,6 +143,12 @@ variable "access_logs_prefix" {
   default     = null
   description = "The path prefix to apply to the LB access logs."
   type        = string
+}
+
+variable "additional_user_data" {
+  description = "Additional user data to configure the EC2 instances"
+  type        = string
+  default     = ""
 }
 
 variable "availability_zone" {
