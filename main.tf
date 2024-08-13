@@ -101,6 +101,7 @@ resource "aws_launch_configuration" "this" {
   instance_type               = var.asg_instance_type
   key_name                    = var.asg_key_name
   user_data                   = base64encode(local.combined_user_data)
+  enable_monitoring           = true
 
   security_groups = concat(
     var.asg_additional_security_groups,
