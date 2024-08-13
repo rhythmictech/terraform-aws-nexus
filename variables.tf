@@ -111,6 +111,18 @@ variable "asg_subnets" {
   type        = list(string)
 }
 
+variable "enabled_metrics" {
+  description = "List of enabled metrics for the Auto Scaling Group"
+  type        = list(string)
+  default     = []
+}
+
+variable "additional_user_data" {
+  description = "Additional user data to configure the EC2 instances"
+  type        = string
+  default     = ""
+}
+
 ########################################
 # Networking Vars
 ########################################

@@ -40,6 +40,8 @@ resource "aws_autoscaling_group" "this" {
   wait_for_capacity_timeout = "15m"
   vpc_zone_identifier       = var.asg_subnets
 
+  enabled_metrics = var.enabled_metrics
+
   target_group_arns = concat(
     var.asg_additional_target_group_arns,
     [aws_lb_target_group.this.arn],
@@ -87,6 +89,10 @@ resource "aws_ebs_volume" "data" {
   )
 }
 
+locals {
+  combined_user_data = "${data.template_cloudinit_config.this.rendered}\n${var.additional_user_data}"
+}
+
 resource "aws_launch_configuration" "this" {
   name_prefix                 = var.name
   associate_public_ip_address = false
@@ -94,7 +100,7 @@ resource "aws_launch_configuration" "this" {
   image_id                    = var.ami_id
   instance_type               = var.asg_instance_type
   key_name                    = var.asg_key_name
-  user_data_base64            = data.template_cloudinit_config.this.rendered
+  user_data                   = base64encode(local.combined_user_data)
 
   security_groups = concat(
     var.asg_additional_security_groups,
