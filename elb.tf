@@ -16,11 +16,11 @@ resource "aws_security_group" "elb" {
 
 resource "aws_security_group_rule" "elb_egress" {
   description              = "Allow traffic from the ELB to the instances"
-  from_port                = 80
+  from_port                = var.elb_to_ec2_port
   protocol                 = "tcp"
   security_group_id        = aws_security_group.elb.id
   source_security_group_id = aws_security_group.this.id
-  to_port                  = 80
+  to_port                  = var.elb_to_ec2_port
   type                     = "egress"
 }
 
@@ -97,7 +97,7 @@ resource "aws_lb_target_group" "this" {
   name_prefix = substr(var.name, 0, 6)
   # Nexus has a bad time if two instances are running at once, so the deregistration delay needs to be short
   deregistration_delay = 10
-  port                 = "80"
+  port                 = var.elb_to_ec2_port
   protocol             = "HTTP"
   tags                 = var.tags
   vpc_id               = var.vpc_id
@@ -107,7 +107,7 @@ resource "aws_lb_target_group" "this" {
     interval          = 15
     matcher           = "200-299,302"
     protocol          = "HTTP"
-    port              = "80"
+    port              = var.elb_to_ec2_port
   }
 
   lifecycle {
@@ -146,7 +146,7 @@ resource "aws_lb_target_group" "additional_this" {
     interval          = 15
     matcher           = "200-299,302"
     protocol          = "HTTP"
-    port              = "80"
+    port              = var.elb_to_ec2_port
   }
 
   lifecycle {

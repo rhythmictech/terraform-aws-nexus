@@ -27,11 +27,11 @@ resource "aws_security_group_rule" "allow_all" {
 
 resource "aws_security_group_rule" "allow_inbound_http_from_lb" {
   description              = "Allow traffic from the load balancer"
-  from_port                = 80
+  from_port                = var.elb_to_ec2_port
   protocol                 = "tcp"
   security_group_id        = aws_security_group.this.id
   source_security_group_id = aws_security_group.elb.id
-  to_port                  = 80
+  to_port                  = var.elb_to_ec2_port
   type                     = "ingress"
 }
 
