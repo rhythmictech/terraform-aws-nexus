@@ -15,7 +15,7 @@ locals {
 data "aws_region" "current" {
 }
 
-data "template_cloudinit_config" "this" {
+data "cloudinit_config" "this" {
 
   part {
     filename = "text/x-shellscript"
@@ -90,7 +90,7 @@ resource "aws_ebs_volume" "data" {
 }
 
 locals {
-  combined_user_data = "${data.template_cloudinit_config.this.rendered}\n${var.additional_user_data}"
+  combined_user_data = "${data.cloudinit_config.this.rendered}\n${var.additional_user_data}"
 }
 
 resource "aws_launch_configuration" "this" {
