@@ -147,3 +147,119 @@ No modules.
 | <a name="output_lb_zone_id"></a> [lb\_zone\_id](#output\_lb\_zone\_id) | Route53 Zone ID of the ELB for Nexus access |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | IAM Role ARN of Nexus instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.26 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.45.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.45.0 |
+| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_autoscaling_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group) | resource |
+| [aws_backup_plan.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/backup_plan) | resource |
+| [aws_backup_selection.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/backup_selection) | resource |
+| [aws_backup_vault.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/backup_vault) | resource |
+| [aws_ebs_volume.data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_volume) | resource |
+| [aws_efs_file_system.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system) | resource |
+| [aws_efs_mount_target.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target) | resource |
+| [aws_iam_instance_profile.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_policy.ebs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.backup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.backup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.ebs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_launch_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration) | resource |
+| [aws_lb.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb) | resource |
+| [aws_lb_listener.additional_this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_listener.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_target_group.additional_this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
+| [aws_lb_target_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
+| [aws_security_group.efs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group.elb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.additional_allow_inbound_http_from_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.additional_elb_egress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.additional_elb_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.allow_all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.allow_inbound_http_from_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.elb_egress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.elb_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_iam_policy_document.assume](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.assume_backup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.ebs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [cloudinit_config.this](https://registry.terraform.io/providers/hashicorp/cloudinit/latest/docs/data-sources/config) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_access_logs_bucket"></a> [access\_logs\_bucket](#input\_access\_logs\_bucket) | The name of the bucket to store LB access logs in. Required if `access_logs_enabled` is `true` | `string` | `null` | no |
+| <a name="input_access_logs_enabled"></a> [access\_logs\_enabled](#input\_access\_logs\_enabled) | Whether to enable LB access logging | `bool` | `false` | no |
+| <a name="input_access_logs_prefix"></a> [access\_logs\_prefix](#input\_access\_logs\_prefix) | The path prefix to apply to the LB access logs. | `string` | `null` | no |
+| <a name="input_additional_ports"></a> [additional\_ports](#input\_additional\_ports) | Additional ports (besides 80/443 for the UI) to open on the nexus instance and create listeners for | `list(number)` | `[]` | no |
+| <a name="input_additional_ports_protocol"></a> [additional\_ports\_protocol](#input\_additional\_ports\_protocol) | Protocol [HTTP, HTTPS] to use for the additional ports | `string` | `"HTTPS"` | no |
+| <a name="input_additional_user_data"></a> [additional\_user\_data](#input\_additional\_user\_data) | Additional user data to configure the EC2 instances | `string` | `""` | no |
+| <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | AMI to build on (must have `ansible-role-nexus` module installed) | `string` | n/a | yes |
+| <a name="input_asg_additional_iam_policies"></a> [asg\_additional\_iam\_policies](#input\_asg\_additional\_iam\_policies) | Additional IAM policies to attach to the  ASG instance profile | `list(string)` | `[]` | no |
+| <a name="input_asg_additional_security_groups"></a> [asg\_additional\_security\_groups](#input\_asg\_additional\_security\_groups) | Additional security group IDs to attach to ASG instances | `list(string)` | `[]` | no |
+| <a name="input_asg_additional_target_group_arns"></a> [asg\_additional\_target\_group\_arns](#input\_asg\_additional\_target\_group\_arns) | ARNs of additional target groups to attach to the ASG | `list(string)` | `[]` | no |
+| <a name="input_asg_additional_user_data"></a> [asg\_additional\_user\_data](#input\_asg\_additional\_user\_data) | Additional User Data to attach to the launch template | `string` | `""` | no |
+| <a name="input_asg_desired_capacity"></a> [asg\_desired\_capacity](#input\_asg\_desired\_capacity) | The number of Amazon EC2 instances that should be running in the group. | `number` | `1` | no |
+| <a name="input_asg_instance_type"></a> [asg\_instance\_type](#input\_asg\_instance\_type) | Instance type for scim app | `string` | `"t3a.micro"` | no |
+| <a name="input_asg_key_name"></a> [asg\_key\_name](#input\_asg\_key\_name) | Optional keypair to associate with instances | `string` | `null` | no |
+| <a name="input_asg_max_size"></a> [asg\_max\_size](#input\_asg\_max\_size) | Maximum number of instances in the autoscaling group | `number` | `2` | no |
+| <a name="input_asg_min_size"></a> [asg\_min\_size](#input\_asg\_min\_size) | Minimum number of instances in the autoscaling group | `number` | `1` | no |
+| <a name="input_asg_subnets"></a> [asg\_subnets](#input\_asg\_subnets) | Subnets to associate ASG instances with (specify 1 or more) | `list(string)` | n/a | yes |
+| <a name="input_availability_zone"></a> [availability\_zone](#input\_availability\_zone) | Specify the availability zone that the instance will be deployed in if using an EBS volume | `string` | `null` | no |
+| <a name="input_ebs_data_volume"></a> [ebs\_data\_volume](#input\_ebs\_data\_volume) | Whether to use EBS instead of EFS | `bool` | `false` | no |
+| <a name="input_ebs_volume_size"></a> [ebs\_volume\_size](#input\_ebs\_volume\_size) | Size of Nexus data volume in GB | `number` | n/a | yes |
+| <a name="input_efs_additional_allowed_security_groups"></a> [efs\_additional\_allowed\_security\_groups](#input\_efs\_additional\_allowed\_security\_groups) | Additional security group IDs to attach to the EFS export | `list(string)` | `[]` | no |
+| <a name="input_efs_backup_retain_days"></a> [efs\_backup\_retain\_days](#input\_efs\_backup\_retain\_days) | Days to retain EFS backups for (only used if `enable_efs_backups=true`) | `number` | `30` | no |
+| <a name="input_efs_backup_schedule"></a> [efs\_backup\_schedule](#input\_efs\_backup\_schedule) | AWS Backup cron schedule (only used if `enable_efs_backups=true`) | `string` | `"cron(0 5 ? * * *)"` | no |
+| <a name="input_efs_backup_vault_name"></a> [efs\_backup\_vault\_name](#input\_efs\_backup\_vault\_name) | AWS Backup vault name (only used if `enable_efs_backups=true`) | `string` | `"nexus-efs-vault"` | no |
+| <a name="input_efs_subnets"></a> [efs\_subnets](#input\_efs\_subnets) | Subnets to create EFS mountpoints in | `list(string)` | n/a | yes |
+| <a name="input_elb_additional_sg_tags"></a> [elb\_additional\_sg\_tags](#input\_elb\_additional\_sg\_tags) | Additional tags to apply to the ELB security group. Useful if you use an external process to manage ingress rules. | `map(string)` | `{}` | no |
+| <a name="input_elb_allowed_cidr_blocks"></a> [elb\_allowed\_cidr\_blocks](#input\_elb\_allowed\_cidr\_blocks) | List of allowed CIDR blocks. If `[]` is specified, no inbound ingress rules will be created | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
+| <a name="input_elb_certificate"></a> [elb\_certificate](#input\_elb\_certificate) | ARN of certificate to associate with ELB | `string` | n/a | yes |
+| <a name="input_elb_internal"></a> [elb\_internal](#input\_elb\_internal) | Create as an internal or internet-facing ELB | `bool` | `true` | no |
+| <a name="input_elb_subnets"></a> [elb\_subnets](#input\_elb\_subnets) | Subnets to associate ELB to | `list(string)` | n/a | yes |
+| <a name="input_enable_efs_backups"></a> [enable\_efs\_backups](#input\_enable\_efs\_backups) | Enable EFS backups using AWS Backup (recommended if you aren't going to back up EFS some other way) | `bool` | `false` | no |
+| <a name="input_enabled_metrics"></a> [enabled\_metrics](#input\_enabled\_metrics) | List of enabled metrics for the Auto Scaling Group | `list(string)` | `[]` | no |
+| <a name="input_license_secret"></a> [license\_secret](#input\_license\_secret) | S3 key including any prefix that has the Nexus Pro license (omit for OSS installs) | `string` | `""` | no |
+| <a name="input_name"></a> [name](#input\_name) | Moniker to apply to all resources in the module | `string` | n/a | yes |
+| <a name="input_root_volume_encryption"></a> [root\_volume\_encryption](#input\_root\_volume\_encryption) | Encrypted root volume | `bool` | `true` | no |
+| <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Size of the root volume | `number` | `8` | no |
+| <a name="input_root_volume_type"></a> [root\_volume\_type](#input\_root\_volume\_type) | Size of the root volume | `string` | `"gp3"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | User-Defined tags | `map(string)` | `{}` | no |
+| <a name="input_volume_key"></a> [volume\_key](#input\_volume\_key) | This value is set to a key on the EBS volume and must be present for the nexus instance to be permitted to attach it. | `string` | `"nexus-volume"` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC to create associated resources in | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_instance_sg_arn"></a> [instance\_sg\_arn](#output\_instance\_sg\_arn) | Security Group ARN attached to instance launch config and thereby the nexus EC2 instance |
+| <a name="output_lb_arn"></a> [lb\_arn](#output\_lb\_arn) | ARN of the ELB for Nexus access |
+| <a name="output_lb_dns_name"></a> [lb\_dns\_name](#output\_lb\_dns\_name) | DNS Name of the ELB for Nexus access |
+| <a name="output_lb_sg_arn"></a> [lb\_sg\_arn](#output\_lb\_sg\_arn) | Security Group ARN attached to ELB |
+| <a name="output_lb_zone_id"></a> [lb\_zone\_id](#output\_lb\_zone\_id) | Route53 Zone ID of the ELB for Nexus access |
+| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | IAM Role ARN of Nexus instance |
+<!-- END_TF_DOCS -->
