@@ -74,12 +74,12 @@ resource "aws_autoscaling_group" "this" {
   }
 }
 
-
 resource "aws_ebs_volume" "data" {
   count = var.ebs_data_volume ? 1 : 0
 
   availability_zone = var.availability_zone
-  size              = var.ebs_volume_size
+  size              = var.ebs_volume_snapshot_id == "" ? var.ebs_volume_size : null
+  snapshot_id       = var.ebs_volume_snapshot_id == "" ? null : var.ebs_volume_snapshot_id
 
   tags = merge(var.tags,
     {
