@@ -195,8 +195,15 @@ variable "ebs_data_volume" {
 }
 
 variable "ebs_volume_size" {
+  default     = 100
   description = "Size of Nexus data volume in GB"
   type        = number
+}
+
+variable "ebs_volume_snapshot_id" {
+  default     = ""
+  description = "Snapshot ID to use as source for new EBS volume"
+  type        = string
 }
 
 ########################################
